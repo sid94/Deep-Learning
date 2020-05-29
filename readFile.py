@@ -4,7 +4,7 @@ import string
 from collections import Counter
 import pickle
 
-def main1():
+def dataRead():
     message = []
     label = []
     
@@ -35,25 +35,6 @@ def main1():
         with open('message.pkl', 'rb') as f:
             message = pickle.load(f)
         
-        print("yes read from pickle")
-        
         with open('label.pkl', 'rb') as f:
             label = pickle.load(f)
-            
-        print(len(label))
-        print(len(message))
-        
-        
-    
-    
-    
-    
-    
-    
-    
-            
-            
-    
-
-
-main1()
+    return message, label
