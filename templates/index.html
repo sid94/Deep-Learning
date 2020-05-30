@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Form</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="stylesheet" type="text/css" 
+    href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class MlApp extends React.Component {
+          constructor(props) {
+          super(props);
+          this.state = {value: ''};
+        }
+          render(){
+              return (
+                <React.Fragment>
+                    <Header />
+                    <MainBody />
+                    <Footer />
+                </React.Fragment>
+              );
+          }
+      }
+
+      class Header extends React.Component{
+          render(){
+              return (
+                <header>
+                    <h1>Spam-Ham Detection - Deep Learning</h1>
+                </header>
+              );
+          }
+      }
+
+      class MainBody extends React.Component{
+          render(){
+              return (
+                <main>
+                <React.Fragment>
+                    <Form/>
+                </React.Fragment>
+                </main>
+              );
+          }
+      }
+
+      class Footer extends React.Component{
+          render(){
+              return (
+                <footer>
+                </footer>
+              );
+          }
+      }
+
+      class Form extends React.Component{
+            constructor(props) {
+                super(props);
+                this.state = {value: ''};
+
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleChange(event) {
+                this.setState({value: event.target.value});
+            }
+
+            handleSubmit(event) {
+                //alert('A name was submitted: ' + this.state.value);
+                fetch('/detect', {
+                    method: 'post',
+                    body: JSON.stringify({ "data" : this.state.value})
+                })
+                .then(res=> res.json())
+                .then((data)=>{ 
+                  alert(data)
+                });
+
+                event.preventDefault();
+            }
+          render(){
+              return(
+                <form onSubmit={this.handleSubmit}>
+                    <label for="textarea">Please copy a email:</label>
+                    <textarea id="textarea" name="message" rows="20" cols="100" value={this.state.value} onChange={this.handleChange} required></textarea>
+                    <input type="submit" value="Submit" />
+                </form>
+              )
+          }
+      }
+
+      ReactDOM.render(
+        <MlApp />,
+        document.getElementById('root')
+      );
+
+    </script> 
+  </body>
+</html>
