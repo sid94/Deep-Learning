@@ -8,6 +8,8 @@ header {
     color: white;
     background-color: steelblue;
     height: 62px;
+    border-bottom: 2px solid dimgray;
+
 }
 header > h1 {
             font-size: x-large;
