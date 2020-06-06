@@ -1,13 +1,12 @@
 import readFile
 import numpy as np
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
-from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout
-from keras.layers.embeddings import Embedding
-from keras.models import model_from_json
-
-
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout, Embedding
+#from tensorflow.keras.layers.embeddings import Embedding
+from tensorflow.keras.models import model_from_json
+import pickle
 
 message, label = readFile.dataRead()
 
@@ -42,6 +41,10 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.fit(message_train, label_train, epochs=3, batch_size=60, validation_split=0.2)
 acc = model.evaluate(message_test, label_test)
 print("Test loss is {0:.2f} accuracy is {1:.2f}" .format(acc[0],acc[1]))
+
+with open('token.pkl', 'wb') as f:
+    pickle.dump(tokenizer, f)
+print("token.pkl created")
 
 # def message_to_array(msg):
 #     testtext = []

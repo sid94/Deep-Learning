@@ -63,7 +63,10 @@
       class Form extends React.Component{
             constructor(props) {
                 super(props);
-                this.state = {value: ''};
+                this.state = {value: '',
+                show : false,
+                displayval : ""
+                };
 
                 this.handleChange = this.handleChange.bind(this);
                 this.handleSubmit = this.handleSubmit.bind(this);
@@ -81,21 +84,42 @@
                 })
                 .then(res=> res.json())
                 .then((data)=>{ 
-                  alert(data)
+                  console.log(data.prediction)
+                  this.setState({ show : true, displayval : data.prediction })
                 });
 
                 event.preventDefault();
             }
           render(){
               return(
+                 <div>
                 <form onSubmit={this.handleSubmit}>
-                    <label for="textarea">Please copy a email:</label>
+                    <label for="textarea">Please copy a email:
                     <textarea id="textarea" name="message" rows="20" cols="100" value={this.state.value} onChange={this.handleChange} required></textarea>
+                    </label>
                     <input type="submit" value="Submit" />
                 </form>
+                <React.Fragment>
+                    <Display show= { this.state.show } displayval={this.state.displayval} />
+                </React.Fragment>
+                </div>
               )
           }
       }
+
+      class Display extends React.Component{
+         render(){
+              return(
+                <div>
+                  {
+                    this.props.show ?
+                       this.props.displayval:
+                    null }
+                </div>
+              )
+          }
+      }
+
       ReactDOM.render(
         <MlApp />,
         document.getElementById('root')

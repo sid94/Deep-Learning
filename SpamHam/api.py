@@ -6,6 +6,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 from tensorflow.keras.models import model_from_json
 import sys
+import pickle
 
 app = Flask(__name__)
 
@@ -15,6 +16,10 @@ max_vocab = 15000
 max_len = 700
 
 loaded_model = load_model('model.h5')
+tokenizer = None
+with open('token.pkl', 'rb') as f:
+    tokenizer = pickle.load(f)
+print("tokenizer loaded")
 
 @app.route("/")
 def home():
@@ -31,7 +36,6 @@ def detect():
         testtext = []
         testtext.append(message)
         testmsg = np.asarray(testtext)
-        tokenizer = Tokenizer(num_words=max_vocab)
         testseq = tokenizer.texts_to_sequences(testmsg)
         testdata = pad_sequences(testseq, maxlen=max_len)
         my_prediction = loaded_model.predict_classes(testdata)[0][0]
