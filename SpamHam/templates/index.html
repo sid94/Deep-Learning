@@ -67,7 +67,6 @@
                 show : false,
                 displayval : ""
                 };
-
                 this.handleChange = this.handleChange.bind(this);
                 this.handleSubmit = this.handleSubmit.bind(this);
             }
@@ -94,9 +93,8 @@
               return(
                  <div>
                 <form onSubmit={this.handleSubmit}>
-                    <label for="textarea">Please copy a email:
+                    <label for="textarea">Please copy a preprocessed email:</label>
                     <textarea id="textarea" name="message" rows="20" cols="100" value={this.state.value} onChange={this.handleChange} required></textarea>
-                    </label>
                     <input type="submit" value="Submit" />
                 </form>
                 <React.Fragment>
@@ -111,10 +109,10 @@
          render(){
               return(
                 <div>
-                  {
+                  <h1>{
                     this.props.show ?
-                       this.props.displayval:
-                    null }
+                         (this.props.displayval == "1" ? "This is a spam email" : "This is a ham email")  :
+                    null } </h1>
                 </div>
               )
           }
