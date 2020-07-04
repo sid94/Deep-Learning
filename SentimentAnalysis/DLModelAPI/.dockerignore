@@ -1,0 +1,6 @@
+model/encoder.pkl
+model/model.h5
+model/model.w2v
+model/tokenizer.pkl
+
+sentimentanalysis.py

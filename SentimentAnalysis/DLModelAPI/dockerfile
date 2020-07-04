@@ -1,0 +1,11 @@
+FROM python:3.8-slim-buster
+
+WORKDIR /usr/src/app
+
+ADD . /usr/src/app
+
+RUN cd model && tar -xzvf model.tar && tar -xzvf tokenizer.tar && cd .. && pip --no-cache-dir install -r requirements.txt
+
+EXPOSE 5000
+
+CMD [ "python", "api.py" ,"-e", "production"]
