@@ -1,40 +1,52 @@
 # Deep learning
 
 
-# sentiment analysis
+# Sentiment Analysis
 
-pip install -U flask-cors
+Sentiment analysis using Deep Learning. Processed 1.6 Millions labelled tweets using tensorflow
 
+Api will be available on http://localhost:5000/
 
-use python api.py
-
-api will be available on http://localhost:5000/
-
-methods
-
+```
 predict() - post method
+```
 
+```
 http://localhost:5000/predict 
+```
 
 Input: 
 data to be passed in the format:
 
-{"tweets": [ {"id" : "58723682638226979", 
-            "text" : "First the global coronavirus lockdown, then Trump's visa ban has separated thousands of families..... ||… https://t.co/YHYiR1tsCy" 
-           },{"id" : "58723682638226979", 
-            "text" : "First the global coronavirus lockdown, then Trump's visa ban has separated thousands of families..... ||… https://t.co/YHYiR1tsCy" 
-           },{"id" : "58723682638226979", 
-            "text" : "First the global coronavirus lockdown, then Trump's visa ban has separated thousands of families..... ||… https://t.co/YHYiR1tsCy" 
-           } ]}
+```
+{
+	"tweets": [
+		{
+			"id": "58723682638226979",
+			"text": "First the global coronavirus lockdown, then Trump's visa ban has separated thousands of families..... ||… https://t.co/YHYiR1tsCy"
+		},
+		{
+			"id": "58723682638226979",
+			"text": "First the global coronavirus lockdown, then Trump's visa ban has separated thousands of families..... ||… https://t.co/YHYiR1tsCy"
+		},
+		{
+			"id": "58723682638226979",
+			"text": "First the global coronavirus lockdown, then Trump's visa ban has separated thousands of families..... ||… https://t.co/YHYiR1tsCy"
+		}
+	]
+}
+```
 
-
+```
 id - is the tweet id parameter and from the twitter data
 text - is the text parameter from the twitter data
+```
 
 preprocess of the twitter tweet text to be done by the api so no need to worry about preprocessing.
 
 Output: 
 
+```
 {
     "data": [
         {
@@ -60,21 +72,34 @@ Output:
         }
     ]
 }
+```
 
 To build a docker image cd into directory of dockerfile
 
 run the command "docker build -t senti:v1 ."
 
+```
 To run that built images use "docker run --name=senti -p 5000:5000 senti:v1" 
+```
 
 Now the app will be available on http://localhost:5000/
 
-now use 
+now use
+```
 http://localhost:5000/predict  Post method to post tweets data
+```
 
 
 
 Tag the docker image using
 
+```
 docker tag sentimentanalyzer:v1 sid94docker/sentimentanalyzer:v1
+```
+
+To run the image from docker hub
+
+```
+docker run --name=sentimentanalyzer -p 5000:5000 sid94docker/sentimentanalyzer:v1
+```
 
