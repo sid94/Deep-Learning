@@ -3,6 +3,7 @@ SentimentAnalysis/DLModelAPI/model/encoder.pkl
 SentimentAnalysis/DLModelAPI/model/model.h5
 SentimentAnalysis/DLModelAPI/model/tokenizer.pkl
 SentimentAnalysis/DLModelAPI/model/model.w2v
+SentimentAnalysis/TwitterAPI/config.js
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -249,6 +250,7 @@ dist
 # TernJS port file
 .tern-port
 
+SentimentAnalysis/TwitterAPI/config.js
 <<<<<<< HEAD
 #End NODEJS gitIgnore------------------------------------------------------------------------------------------------
 =======
