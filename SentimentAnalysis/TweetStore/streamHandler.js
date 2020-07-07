@@ -1,12 +1,21 @@
 let Tweet = require('./tweet');
 
 module.exports = function(stream){
-    stream.forEach(tweetdata => {
+    stream.data.forEach(tweetdata => {
         let tweetEntry = new Tweet(tweetdata);
-        tweetEntry.save(function(err){
-            if(err){
-                console.log('Error while saving tweet entry to database');
+        console.log(tweetEntry._id);
+        Tweet.count({_id: tweetEntry._id}, function(err, count) {
+            if(count > 0){
+                console.error('Id already exist');
+                // throw new Error('Id already exist');
             }
-        });
+            else{
+                tweetEntry.save(function(err){
+                    if(err){
+                        console.error(err);
+                    }
+                });
+            }
+        })
     });
 }

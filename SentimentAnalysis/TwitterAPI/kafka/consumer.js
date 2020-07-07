@@ -2,6 +2,9 @@ const kafka = require('kafka-node');
 const config = require('./config');
 const bodyparser = require("body-parser");
 const axios = require("axios");
+const EventEmitter = require("eventemitter3");
+
+let EE = new EventEmitter();
 
 try {
     const Consumer = kafka.Consumer;
@@ -23,16 +26,17 @@ try {
         }
     );
     consumer.on('message', async function (message) {
-        // console.log(
-        //     'kafka ',
-        //     JSON.parse(message.value)
-        // );
-        axios.post('http://localhost:5000/predict', {
+        await axios.post('http://localhost:5000/predict', {
             tweets : JSON.parse(message.value)
           })
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
+          .then(async function (response) {
+            //console.log(JSON.stringify(response.data.data[0]._id));
+            await axios.post('http://localhost:4000/tweets', response.data)
           })
+          .then((res) => {
+            //console.log('Tweets stored in database');
+            EE.emit('tweetStream', response.data);
+            })
           .catch(function (error) {
             console.log(error);
           });
@@ -45,3 +49,5 @@ try {
     // catch error trace
     console.log(error);
 }
+
+module.exports = EE;
