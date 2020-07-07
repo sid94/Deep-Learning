@@ -24,7 +24,6 @@ const pushDataToKafka = (dataToPush,config) => {
         producer.on('ready', function () {
             console.log("kafka producer is ready")
         })
-        //console.log(dataToPush[0]._id)
         producer.send(payloadToKafkaTopic, (err, data) => {
         });
         producer.on('error', function (err) {

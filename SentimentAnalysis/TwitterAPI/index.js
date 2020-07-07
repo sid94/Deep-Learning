@@ -19,7 +19,6 @@ let T = new Twitter(config);
 
 //Make a call to Twitter API
 io.on('connection', function(socket){
-    console.log('Client connected');
     let tweetArr = [];
     // var stream = T.stream('statuses/filter', {track: 'trump2020landslide', tweet_mode: 'extended'});
     EE.on('tweetStream', function(tweet) {

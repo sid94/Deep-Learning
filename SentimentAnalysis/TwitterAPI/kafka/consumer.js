@@ -3,6 +3,7 @@ const config = require('./config');
 const bodyparser = require("body-parser");
 const axios = require("axios");
 const EventEmitter = require("eventemitter3");
+const { response } = require('express');
 
 let EE = new EventEmitter();
 
@@ -30,12 +31,12 @@ try {
             tweets : JSON.parse(message.value)
           })
           .then(async function (response) {
-            //console.log(JSON.stringify(response.data.data[0]._id));
             await axios.post('http://localhost:4000/tweets', response.data)
+            return response;
           })
           .then((res) => {
-            //console.log('Tweets stored in database');
-            EE.emit('tweetStream', response.data);
+                if(res != null && res != undefined)
+                    EE.emit('tweetStream', res.data);
             })
           .catch(function (error) {
             console.log(error);
