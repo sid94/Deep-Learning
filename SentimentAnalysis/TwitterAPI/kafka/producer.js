@@ -25,7 +25,6 @@ const pushDataToKafka = (dataToPush,config) => {
             console.log("kafka producer is ready")
         })
         producer.send(payloadToKafkaTopic, (err, data) => {
-            console.log('data: ', data);
         });
         producer.on('error', function (err) {
             //  handle error cases here
@@ -43,9 +42,9 @@ let getTweetStream = function(stream) {
         if (tweet.hasOwnProperty("retweeted_status")){
             try{
                 if(!isNullorUndefined(tweet) && !isNullorUndefined(tweet.retweeted_status) && !isNullorUndefined(tweet.retweeted_status.extended_tweet) && !isNullorUndefined(tweet.retweeted_status.extended_tweet['full_text'])){
-                    tweetArr.push({"id" : tweet.id_str, "text": tweet.retweeted_status.extended_tweet['full_text']});
+                    tweetArr.push({"_id" : tweet.id_str, "text": tweet.retweeted_status.extended_tweet['full_text']});
                 }else{
-                    tweetArr.push({"id":tweet.id_str,"text":tweet.retweeted_status.text});
+                    tweetArr.push({"_id":tweet.id_str,"text":tweet.retweeted_status.text});
                 }
             }
             catch(error){
@@ -55,9 +54,9 @@ let getTweetStream = function(stream) {
         else{
             try{
                 if(!isNullorUndefined(tweet) && !isNullorUndefined(tweet.extended_tweet) && !isNullorUndefined(tweet.extended_tweet['full_text'])){
-                    tweetArr.push({"id":tweet.id_str,"text":tweet.extended_tweet['full_text']})
+                    tweetArr.push({"_id":tweet.id_str,"text":tweet.extended_tweet['full_text']})
                 }else{
-                    tweetArr.push({"id":tweet.id_str,"text":tweet.text});
+                    tweetArr.push({"_id":tweet.id_str,"text":tweet.text});
                 }
             }
             catch(error){
