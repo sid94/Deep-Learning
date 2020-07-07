@@ -21,15 +21,14 @@ const pushDataToKafka = (dataToPush,config) => {
             topic: config.KafkaTopic,
             messages: JSON.stringify(dataToPush)
         }];
-        console.log(payloadToKafkaTopic);
-        producer.once('ready', async function () {
-            producer.send(payloadToKafkaTopic, (err, data) => {
-                console.log('data: ', data);
-            });
-
-            producer.once('error', function (err) {
-                //  handle error cases here
-            })
+        producer.on('ready', function () {
+            console.log("kafka producer is ready")
+        })
+        producer.send(payloadToKafkaTopic, (err, data) => {
+            console.log('data: ', data);
+        });
+        producer.on('error', function (err) {
+            //  handle error cases here
         })
     } catch (error) {
         console.log(error);
