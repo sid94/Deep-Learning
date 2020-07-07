@@ -1,8 +1,8 @@
 # Deep-Learning
 
-# Spam Ham
+## Spam Ham
 
-# Demo
+## Demo
 
 ![](Demo/demo.gif)
 
