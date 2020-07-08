@@ -1,6 +1,6 @@
 # Deep-Learning
 
-# Sentiment Analysis
+## Sentiment Analysis of Real Time Tweets from Twitter API
 
 This project will analyze the sentiments of users tweet extracted from a real-time twitter api. We have built a Deep learning based LSTM model on google colab using 1.6 million labelled tweet dataset. We have exposed this pre-trained DL model using flask api. Further detail regarding api given below. This deep learning solution is also containerized and available as a docker image stored in docker hub sid94docker/sentimentanalyzer:v1. 
 
@@ -10,6 +10,8 @@ This tweet data is consumed on a React based UI
 
   #### Technologies :
   Python, Tensorflow, Keras, LSTM, NLP, Flask, Docker, NodeJS, Apache Kafka (NodeJS), Socket.io, Event Emitters, MongoDB, React, HTML, CSS
+
+## Demo
 
 ## Deep Learning Model Api
 
