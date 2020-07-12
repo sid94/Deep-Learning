@@ -1,9 +1,6 @@
 const kafka = require('kafka-node');
 const config = require('./config');
-const bodyparser = require("body-parser");
-const axios = require("axios");
 const EventEmitter = require("eventemitter3");
-const { response } = require('express');
 
 let EE = new EventEmitter();
 
@@ -17,7 +14,7 @@ try {
     let consumer = new Consumer(
         client,
         [{
-            topic: config.KafkaTopic,
+            topic: config.KafkaProcessedTweetTopic,
             partition: 0
         }], {
             autoCommit: true,
@@ -26,21 +23,15 @@ try {
             encoding: 'utf8'
         }
     );
-    consumer.on('message', async function (message) {
-        await axios.post('http://localhost:5000/predict', {
-            tweets : JSON.parse(message.value)
-          })
-          .then(async function (response) {
-            await axios.post('http://localhost:4000/tweets', response.data)
-            return response;
-          })
-          .then((res) => {
-                if(res != null && res != undefined)
-                    EE.emit('tweetStream', res.data);
-            })
-          .catch(function (error) {
-            console.log(error);
-          });
+    consumer.on('message', function (message) {
+        msg = JSON.parse(message.value)
+        //console.log(msg[0]._id)
+
+        if (msg != undefined && msg.length > 0) {
+            msg.forEach((elem) => {
+            EE.emit('tweetStream', elem.text)
+        });
+      }
     })
     consumer.on('error', function (error) {
         //  handle error 

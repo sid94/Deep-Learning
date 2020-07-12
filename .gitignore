@@ -4,6 +4,8 @@ SentimentAnalysis/DLModelAPI/model/model.h5
 SentimentAnalysis/DLModelAPI/model/tokenizer.pkl
 SentimentAnalysis/DLModelAPI/model/model.w2v
 SentimentAnalysis/TwitterAPI/config.js
+SentimentAnalysis/UI/node_modules
+SentimentAnalysis/UI/dist
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

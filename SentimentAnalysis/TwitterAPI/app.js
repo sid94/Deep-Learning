@@ -15,12 +15,15 @@ const producer = new Producer(client, {
 let T = new Twitter((({ consumer_key, consumer_secret,access_token_key,access_token_secret}) => ({  consumer_key, consumer_secret,access_token_key,access_token_secret}))(config));
 
 const pushDataToKafka = (dataToPush,config) => {
-
     try {
+    
+    if(!isNullorUndefined(dataToPush) && !isNullorUndefined(dataToPush[0]) && 
+    !isNullorUndefined(dataToPush[0]._id) && !isNullorUndefined(dataToPush[0].text)){
         let payloadToKafkaTopic = [{
             topic: config.KafkaTopic,
             messages: JSON.stringify(dataToPush)
         }];
+        console.log(dataToPush[0]._id)
         producer.on('ready', function () {
             console.log("kafka producer is ready")
         })
@@ -29,6 +32,8 @@ const pushDataToKafka = (dataToPush,config) => {
         producer.on('error', function (err) {
             //  handle error cases here
         })
+
+    }
     } catch (error) {
         console.log(error);
     }
