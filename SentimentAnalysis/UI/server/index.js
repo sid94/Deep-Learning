@@ -15,7 +15,6 @@ io.on('connection', function(socket) {
   //try {
     console.log('Client Connected');
     EE.on('tweetStream', function (tweet) {
-      console.log("text : " + tweet);
       socket.emit('tweet', tweet);
     })
     EE.on('error', function (error) {
