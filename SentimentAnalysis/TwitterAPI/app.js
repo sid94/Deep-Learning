@@ -48,9 +48,12 @@ let getTweetStream = function(stream) {
         if (tweet.hasOwnProperty("retweeted_status")){
             try{
                 if(!isNullorUndefined(tweet) && !isNullorUndefined(tweet.retweeted_status) && !isNullorUndefined(tweet.retweeted_status.extended_tweet) && !isNullorUndefined(tweet.retweeted_status.extended_tweet['full_text'])){
-                    tweetArr.push({"_id" : tweet.id_str, "text": tweet.retweeted_status.extended_tweet['full_text']});
+                    tweetArr.push({"_id" : tweet.id_str, "text": tweet.retweeted_status.extended_tweet['full_text'], 
+                "timestamp" : tweet.created_at, "username" : tweet.user.name, "twitterid" : tweet.user.screen_name
+                });
                 }else{
-                    tweetArr.push({"_id":tweet.id_str,"text":tweet.retweeted_status.text});
+                    tweetArr.push({"_id":tweet.id_str,"text":tweet.retweeted_status.text,
+                    "timestamp" : tweet.created_at, "username" : tweet.user.name, "twitterid" : tweet.user.screen_name});
                 }
             }
             catch(error){
@@ -60,9 +63,11 @@ let getTweetStream = function(stream) {
         else{
             try{
                 if(!isNullorUndefined(tweet) && !isNullorUndefined(tweet.extended_tweet) && !isNullorUndefined(tweet.extended_tweet['full_text'])){
-                    tweetArr.push({"_id":tweet.id_str,"text":tweet.extended_tweet['full_text']})
+                    tweetArr.push({"_id":tweet.id_str,"text":tweet.extended_tweet['full_text'],
+                    "timestamp" : tweet.created_at, "username" : tweet.user.name, "twitterid" : tweet.user.screen_name})
                 }else{
-                    tweetArr.push({"_id":tweet.id_str,"text":tweet.text});
+                    tweetArr.push({"_id":tweet.id_str,"text":tweet.text,
+                    "timestamp" : tweet.created_at, "username" : tweet.user.name, "twitterid" : tweet.user.screen_name});
                 }
             }
             catch(error){
