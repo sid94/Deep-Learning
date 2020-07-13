@@ -1,5 +1,6 @@
 const Kafka = require('kafka-node');
 const config = require('./config');
+const secret = require('./secret');
 
 const Twitter = require('twitter');
 
@@ -12,7 +13,7 @@ const producer = new Producer(client, {
     partitionerType: 2
 });
 
-let T = new Twitter((({ consumer_key, consumer_secret,access_token_key,access_token_secret}) => ({  consumer_key, consumer_secret,access_token_key,access_token_secret}))(config));
+let T = new Twitter((({ consumer_key, consumer_secret,access_token_key,access_token_secret}) => ({  consumer_key, consumer_secret,access_token_key,access_token_secret}))(secret));
 
 const pushDataToKafka = (dataToPush,config) => {
     try {
