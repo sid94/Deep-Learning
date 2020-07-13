@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TweetStream from './TweetStream';
+import TweetWidget from './TweetWidget';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import './styles/style.css'
 
 ReactDOM.render(
-  <TweetStream/>,
+  <TweetWidget/>,
   document.getElementById('root')
 );

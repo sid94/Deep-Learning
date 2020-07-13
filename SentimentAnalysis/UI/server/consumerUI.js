@@ -29,7 +29,7 @@ try {
 
         if (msg != undefined && msg.length > 0) {
             msg.forEach((elem) => {
-            EE.emit('tweetStream', elem.text)
+            EE.emit('tweetStream', elem)
         });
       }
     })
