@@ -5,7 +5,10 @@ let tweetSchema = new mongoose.Schema({
         text : String,
         score     : Number,
         label  : String,
-        active    : Boolean
+        active    : Boolean,
+        timestamp : String,
+        username : String,
+        twitterid : String
 });
 
 //static getTweets method to return tweets from DB

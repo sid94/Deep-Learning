@@ -1,0 +1,150 @@
+body{
+    background: linear-gradient(to bottom, #99ccff 0%, #ccff99 100%);
+}
+
+.col-style{
+    height: 92vh !important;
+}
+
+h2{
+    text-align: center;
+    color: dodgerblue;
+}
+
+.wrapper{
+    height: 375px;
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.wrapper:hover{
+    overflow-y: scroll;
+}
+
+
+.wrapper::after {
+    bottom: 0px;
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+    content: "";
+    display: block;
+    position: sticky;
+    width: 100%;
+    left: 0;
+    height: 30px;
+    z-index: 10;
+}
+
+
+.tweet-container {
+    overflow: hidden;
+    position: relative;
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 0){
+    .tweet {
+        background-color: #ffffff;
+        width: 100%;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 5px auto;
+        display: table;
+        position: relative;
+        box-sizing: border-box;
+    }
+}
+
+.slide {
+    margin-top: -100%;
+    opacity: 0;
+    -webkit-animation: slide 2s ease-in-out forwards, appear 3s ease-in-out forwards;
+}
+
+#tweet-1 {
+    -webkit-animation-delay: 41s;
+}
+
+.tweet-avatar-wrapper {
+    width: 45px;
+    float: left;
+    background: #00ffc4;
+    height: 45px;
+    display: inline-block;
+    border-radius: 5px;
+    /* padding: 7px; */
+    margin-right: 10px;
+    background: url(../images/avatar_male.png);
+    vertical-align: middle;
+    background-size: cover !important;
+    border-radius: 50%;
+}
+
+
+
+
+.tweet-wrapper {
+    width: 83%;
+    float: left;
+    margin-left: 7px;
+}
+
+.name, .handle, .copy, .timestamp, .sentiment {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 25px;
+    color: #111111;
+}
+
+.handle {
+    color: #7fbbc0;
+    display: inline-block;
+    margin-left: 3px;
+}
+
+.timestamp {
+    color: #999999;
+    margin-left: 3px;
+    display: inline-block;
+}
+.sentiment{
+    margin-left: 3px;
+    display: inline-block;
+    font-weight: bold;
+    font-variant: small-caps;
+    font-size: 20px;
+}
+
+.sentiment-neg{
+    color: red;
+}
+.sentiment-pos{
+    color: green;
+}
+
+.sentiment-neu{
+    color: cornflowerblue;
+}
+.copy {
+    color: #666666;
+    margin-top: 5px;
+    display: block;
+}
+
+
+.timestamp::before {
+    content: '\2022';
+    margin-right: 5px;
+}
+
+.tweet .copy:before {
+    white-space: pre-wrap;
+}

@@ -6,7 +6,7 @@ class TweetStream extends React.Component{
     constructor(){
         super();
         this.state = {
-            response: false,
+            response: [],
             endpoint: "http://localhost:3000"
         };
     }
@@ -16,7 +16,7 @@ class TweetStream extends React.Component{
         const socket = socketIOClient(endpoint);
         socket.on('connect', () => {
             console.log('Socket connected');
-            socket.on('tweet', (data) => this.setState({response : data}));
+            socket.on('tweet', (data) => this.setState({response : [data]}));
         });
     }
 
@@ -24,14 +24,15 @@ class TweetStream extends React.Component{
         const { response } = this.state;
         return (
             <div>
-                <h1>Sentiment Analysis for Twitter API</h1>
                 <div style={{ textAlign: "center"}}>
+                    
                     {response
-                        ? <p>
-                            Tweet : {response}
-                        </p>
-                        : <p>Loading..</p>
+                        ?   <ul>
+                                {response.map(obj => <li key={obj._id}>{obj.text}</li>)}
+                            </ul>
+                        : <p>loading...</p>
                     }
+
                 </div>
             </div>
         );
