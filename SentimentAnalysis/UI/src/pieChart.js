@@ -14,7 +14,7 @@ class PieChart extends React.Component {
         this.timer = setInterval(async ()=> {
             await axios.get('http://localhost:4000/getPolarity')
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 let labelarr = [];
                 let polarityCount  = [];
                 res.data.map(obj => {
@@ -35,7 +35,7 @@ class PieChart extends React.Component {
                 });
             })
             .catch( err => console.error(`Error : ${err}`))
-        }, 5000);
+        }, 30000);
     }
 
     componentDidMount(){
