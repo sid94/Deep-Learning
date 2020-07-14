@@ -1,5 +1,5 @@
 import React from "react";
-import TweetStream from "./TweetStream";
+import TweetCard from "./TweetCard";
 
 class TweetWidget extends React.Component{
     render(){
@@ -9,7 +9,7 @@ class TweetWidget extends React.Component{
                 <div class="row">
                     <div class="col-sm-8 col-style">
                         <div class="wrapper">
-                            <TweetStream/>
+                            <TweetCard/>
                         </div>
                     </div>
                     <div class="col-sm-4 col-style">
