@@ -45,7 +45,7 @@ class TweetList extends React.Component{
         )
 
         let loading = (
-            <div class="loader">loading...</div>
+            <div class="loader" alt="loading..."></div>
         )
         return (
             <React.Fragment>
