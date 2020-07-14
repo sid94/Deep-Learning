@@ -24,6 +24,7 @@ class TweetList extends React.Component{
             });
         });
         socket.on("disconnect", () => {
+            clearInterval(this.props.timer)
             socket.off("tweet");
             socket.removeAllListeners("tweet");
             console.log("Socket Disconnected");

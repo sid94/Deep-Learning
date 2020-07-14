@@ -3,15 +3,14 @@ import axios from  'axios';
 import {Pie} from 'react-chartjs-2';
 
 class PieChart extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             Data: {}
         }
     }
 
     async dataCall(){
-        {
             await axios.get('http://localhost:4000/getPolarity')
             .then(res => {
                 //console.log(res);
@@ -46,7 +45,6 @@ class PieChart extends React.Component {
                 });
             })
             .catch( err => console.error(`Error : ${err}`))
-        }
     }
 
     setData(){
@@ -54,6 +52,7 @@ class PieChart extends React.Component {
         this.timer = setInterval(async ()=> {
             this.dataCall()
         }, 30000);
+        this.props.handler(this.timer)
     }
 
     componentDidMount(){

@@ -1,5 +1,5 @@
 body{
-    background: linear-gradient(to bottom, #99ccff 0%, #ccff99 100%);
+    background: linear-gradient(to bottom, #99ccff 0%, #ccff99 100%) no-repeat;
 }
 
 .col-style{
@@ -20,6 +20,10 @@ h2{
 
 .wrapper:hover{
     overflow-y: scroll;
+}
+
+.pie-container{
+    margin-top: 30%;
 }
 
 
