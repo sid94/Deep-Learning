@@ -1,5 +1,6 @@
 import React from "react";
 import TweetCard from "./TweetCard";
+import PieChart from "./PieChart";
 
 class TweetWidget extends React.Component{
     render(){
@@ -13,7 +14,7 @@ class TweetWidget extends React.Component{
                         </div>
                     </div>
                     <div class="col-sm-4 col-style">
-                        
+                        <PieChart/>
                     </div>
                 </div>
             </div>

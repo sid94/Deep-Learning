@@ -4,6 +4,7 @@ let bodyParser = require('body-parser');
 let streamHandler = require('./streamHandler');
 let Database = require('./database');
 let routes = require('./routes');
+let Tweet = require('./tweet');
 let port = process.env.PORT || 4000;
 
 const OK = 200;
@@ -24,7 +25,8 @@ app.use(bodyParser.json());
 app.get('/', test());
 
 //Index route ::: Get tweets from db
-app.get('/tweets', getTweets(app));
+// app.get('/tweets', getTweets(app));
+app.get('/getPolarity', getPolarityCount(app));
 
 //Store tweets to db
 app.post('/tweets', storeTweets(app));
@@ -68,6 +70,26 @@ function getTweets(app) {
             res.json(result)
         }
         catch (err) {
+            const mapped = mapError(err);
+            res.status(mapped.status).json(mapped);
+        }
+    })
+}
+
+function getPolarityCount(app){
+    return errorWrap(async function(req, res){
+        try{
+            const result = await Tweet.aggregate([
+                {
+                    $group: {
+                        _id : '$label',
+                        count : {$sum : 1}
+                    }
+                }
+            ]);
+            res.json(result);
+        }
+        catch(err){
             const mapped = mapError(err);
             res.status(mapped.status).json(mapped);
         }
