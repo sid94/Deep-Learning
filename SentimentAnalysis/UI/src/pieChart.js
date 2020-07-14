@@ -10,8 +10,8 @@ class PieChart extends React.Component {
         }
     }
 
-    setData(){
-        this.timer = setInterval(async ()=> {
+    async dataCall(){
+        {
             await axios.get('http://localhost:4000/getPolarity')
             .then(res => {
                 //console.log(res);
@@ -31,10 +31,28 @@ class PieChart extends React.Component {
                                 backgroundColor : ['#068587', '#fc5b3f', '#6fb07f']
                             }
                         ]
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                fontColor: "white",
+                                boxWidth: 20,
+                                padding: 20
+                            }
+                        }
                     }
                 });
             })
             .catch( err => console.error(`Error : ${err}`))
+        }
+    }
+
+    setData(){
+        this.dataCall()
+        this.timer = setInterval(async ()=> {
+            this.dataCall()
         }, 30000);
     }
 
@@ -49,12 +67,14 @@ class PieChart extends React.Component {
     render(){
         return (
             <React.Fragment>
-                <h1>Average Polarity</h1>
+                <h3>Average Polarity</h3>
+                <div class="pie-position">
                 <Pie
                     data={
                         this.state.Data
                     }
                 />
+                </div>
             </React.Fragment>
         );
     }   

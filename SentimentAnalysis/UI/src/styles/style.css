@@ -148,3 +148,18 @@ h2{
 .tweet .copy:before {
     white-space: pre-wrap;
 }
+
+h3{
+    text-align: center !important;
+}
+
+.loader{
+    margin: auto;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0
+}

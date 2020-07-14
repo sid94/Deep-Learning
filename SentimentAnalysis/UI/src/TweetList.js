@@ -43,9 +43,13 @@ class TweetList extends React.Component{
                 }
             </TransitionGroup>
         )
+
+        let loading = (
+            <div class="loader">loading...</div>
+        )
         return (
             <React.Fragment>
-                    {items.length > 0 ? itemCards : "loading..."}
+                    {items.length > 0 ? itemCards : loading }
             </React.Fragment>
         );
     }
