@@ -3,18 +3,17 @@ import axios from  'axios';
 import {Pie} from 'react-chartjs-2';
 
 class PieChart extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             Data: {}
         }
     }
 
-    setData(){
-        this.timer = setInterval(async ()=> {
+    async dataCall(){
             await axios.get('http://localhost:4000/getPolarity')
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 let labelarr = [];
                 let polarityCount  = [];
                 res.data.map(obj => {
@@ -31,11 +30,29 @@ class PieChart extends React.Component {
                                 backgroundColor : ['#068587', '#fc5b3f', '#6fb07f']
                             }
                         ]
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                fontColor: "white",
+                                boxWidth: 20,
+                                padding: 20
+                            }
+                        }
                     }
                 });
             })
             .catch( err => console.error(`Error : ${err}`))
-        }, 5000);
+    }
+
+    setData(){
+        this.dataCall()
+        this.timer = setInterval(async ()=> {
+            this.dataCall()
+        }, 30000);
+        this.props.handler(this.timer)
     }
 
     componentDidMount(){
@@ -49,12 +66,14 @@ class PieChart extends React.Component {
     render(){
         return (
             <React.Fragment>
-                <h1>Average Polarity</h1>
+                <h3>Average Polarity</h3>
+                <div class="pie-position">
                 <Pie
                     data={
                         this.state.Data
                     }
                 />
+                </div>
             </React.Fragment>
         );
     }   

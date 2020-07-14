@@ -20,11 +20,12 @@ io.on('connection', function(socket) {
     EE.on('error', function (error) {
       console.error(`Error : ${error}`);
     });
-
+    socket.on("disconnet", () => console.log("Client disconnected!"));
   // } catch (error) {
   //   console.error(`Error : ${error}`);
   // }
 });
+
 
 // io.on('connection', (socket) => {
 //   try {

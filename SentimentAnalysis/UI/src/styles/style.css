@@ -1,5 +1,5 @@
 body{
-    background: linear-gradient(to bottom, #99ccff 0%, #ccff99 100%);
+    background: linear-gradient(to bottom, #99ccff 0%, #ccff99 100%) no-repeat;
 }
 
 .col-style{
@@ -20,6 +20,10 @@ h2{
 
 .wrapper:hover{
     overflow-y: scroll;
+}
+
+.pie-container{
+    margin-top: 30%;
 }
 
 
@@ -148,3 +152,36 @@ h2{
 .tweet .copy:before {
     white-space: pre-wrap;
 }
+
+h3{
+    text-align: center !important;
+}
+
+.loader{
+    margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #3498db;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
