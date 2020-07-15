@@ -112,6 +112,12 @@ Tag the docker image using
 docker tag sentimentanalyzer:v1 sid94docker/sentimentanalyzer:v1
 ```
 
+Push the image to docker hub
+
+```
+docker push sid94docker/sentimentanalyzer:v1
+```
+
 To run the image from docker hub
 
 ```
