@@ -24,6 +24,7 @@ class TweetList extends React.Component{
             });
         });
         socket.on("disconnect", () => {
+            //console.log("Socket dis : " + (this.props.timer).toString())
             clearInterval(this.props.timer)
             socket.off("tweet");
             socket.removeAllListeners("tweet");
@@ -46,7 +47,11 @@ class TweetList extends React.Component{
         )
 
         let loading = (
+            <React.Fragment>
             <div class="loader" alt="loading..."></div>
+            <div class="load-text">Loading Tweets...</div>
+            </React.Fragment>
+            
         )
         return (
             <React.Fragment>
