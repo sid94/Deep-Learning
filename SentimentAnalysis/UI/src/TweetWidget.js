@@ -6,17 +6,14 @@ class TweetWidget extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            clearInterval: ""
+            clearInterval: 0
         }
         this.stateHandler = this.stateHandler.bind(this)
         console.log(this.state.clearInterval)
     }
 
     stateHandler(timer){
-        this.setState({
-            clearInterval : timer
-        })
-        console.log(this.state.clearInterval)
+        this.setState({clearInterval : timer}, () => { console.log(this.state.clearInterval)});
     }
 
 
@@ -32,7 +29,7 @@ class TweetWidget extends React.Component{
                     </div>
                     <div class="col-sm-4 col-style">
                         <div class="pie-container">
-                            <PieChart handler = {this.stateHandler}/>
+                            <PieChart handler={this.stateHandler}/>
                         </div>
                     </div>
                 </div>
