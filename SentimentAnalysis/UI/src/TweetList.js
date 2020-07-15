@@ -47,7 +47,11 @@ class TweetList extends React.Component{
         )
 
         let loading = (
+            <React.Fragment>
             <div class="loader" alt="loading..."></div>
+            <div class="load-text">Loading Tweets...</div>
+            </React.Fragment>
+            
         )
         return (
             <React.Fragment>
