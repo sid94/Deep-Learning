@@ -3,7 +3,6 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let streamHandler = require('./streamHandler');
 let Database = require('./database');
-let routes = require('./routes');
 let Tweet = require('./tweet');
 let port = process.env.PORT || 4000;
 
@@ -55,19 +54,6 @@ function storeTweets(app) {
             const obj = req.body;
             const results = await streamHandler(obj);
             res.sendStatus(CREATED);
-        }
-        catch (err) {
-            const mapped = mapError(err);
-            res.status(mapped.status).json(mapped);
-        }
-    })
-}
-
-function getTweets(app) {
-    return errorWrap(async function (req, res) {
-        try {
-            const result =  await routes();
-            res.json(result)
         }
         catch (err) {
             const mapped = mapError(err);
