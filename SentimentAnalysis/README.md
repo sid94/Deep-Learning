@@ -89,10 +89,12 @@ Output:
 
 To build a docker image cd into directory of dockerfile
 
-run the command "docker build -t senti:v1 ."
+```
+run the command "docker build -t sentimentanalyzer:v1 ."
+```
 
 ```
-To run that built images use "docker run --name=senti -p 5000:5000 senti:v1" 
+To run that built images use "docker run --name=sentimentanalyzer -p 5000:5000 sentimentanalyzer:v1" 
 ```
 
 Now the app will be available on http://localhost:5000/
@@ -108,6 +110,12 @@ Tag the docker image using
 
 ```
 docker tag sentimentanalyzer:v1 sid94docker/sentimentanalyzer:v1
+```
+
+Push the image to docker hub
+
+```
+docker push sid94docker/sentimentanalyzer:v1
 ```
 
 To run the image from docker hub

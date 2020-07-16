@@ -28,11 +28,11 @@ try {
         //msg = JSON.parse(message.value)
         //console.log(msg[0]._id)
 
-        await axios.post('http://localhost:5000/predict', {
+        await axios.post(config.sentimentAnalyzerEndPoint, {
             tweets : JSON.parse(message.value)
           })
           .then(async function (response) {
-            await axios.post('http://localhost:4000/tweets', response.data)
+            await axios.post(config.tweetStoreServiceEndPoint, response.data)
             //return response;
             producer.pushDataToKafka(response);
            })
