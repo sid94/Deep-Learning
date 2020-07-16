@@ -1,0 +1,29 @@
+FROM node:13.13.0-alpine
+
+# Install python in node:slim  base image
+# RUN apt-get update || : && apt-get install python -y
+
+# Install python in node:alpine base image
+#RUN apk add g++ make python
+
+# Create app directory
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+# Bundle app source
+COPY . .
+
+# Install NTPD for time synchronization and timezone data.
+RUN apk --no-cache update && \
+    apk --no-cache upgrade && \
+    apk --no-cache add tzdata openntpd
+
+ENV KAFKA_HOST=localhost:9092 \
+    KAFKA_TOPIC=tweetstream \
+    SET_CONTAINER_TIMEZONE=true \ 
+    CONTAINER_TIMEZONE=America/New_York
+
+ENTRYPOINT ["./startup.sh"]
+
+CMD ["startup.sh"]   
