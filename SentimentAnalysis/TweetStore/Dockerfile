@@ -8,7 +8,6 @@ COPY package*.json ./
 RUN npm install
 # Bundle app source
 COPY . .
-ENV PORT=4000 \
-    MONGO_URL=mongodb://mongo:27017
+
 EXPOSE 4000
 CMD ["npm", "start"]
