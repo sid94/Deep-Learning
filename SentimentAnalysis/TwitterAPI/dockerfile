@@ -11,19 +11,27 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
+RUN npm install
+
 # Bundle app source
 COPY . .
 
 # Install NTPD for time synchronization and timezone data.
-RUN apk --no-cache update && \
-    apk --no-cache upgrade && \
-    apk --no-cache add tzdata openntpd
+# RUN apk --no-cache update && \
+#     apk --no-cache upgrade && \
+#     apk --no-cache add tzdata openntpd 
+    # && \
+    # apk --update add bash && \
+    # apk add dos2unix
 
-ENV KAFKA_HOST=localhost:9092 \
-    KAFKA_TOPIC=tweetstream \
-    SET_CONTAINER_TIMEZONE=true \ 
-    CONTAINER_TIMEZONE=America/New_York
+# RUN dos2unix ./startup.sh
+# ENV KAFKA_HOST=localhost:9092 \
+#     KAFKA_TOPIC=tweetstream 
+    # SET_CONTAINER_TIMEZONE=true \ 
+    # CONTAINER_TIMEZONE=America/New_York
 
-ENTRYPOINT ["./startup.sh"]
+# ENTRYPOINT ["./startup.sh"]
 
-CMD ["startup.sh"]   
+CMD [ "npm", "start" ]
+
+# CMD ["dos2unix","./startup.sh"]

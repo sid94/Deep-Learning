@@ -6,6 +6,7 @@ SentimentAnalysis/DLModelAPI/model/model.w2v
 SentimentAnalysis/TwitterAPI/secret.js
 SentimentAnalysis/UI/node_modules
 SentimentAnalysis/UI/dist
+SentimentAnalysis/data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

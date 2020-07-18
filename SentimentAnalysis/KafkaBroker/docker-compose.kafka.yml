@@ -1,0 +1,28 @@
+version: "3"
+
+services: 
+    zookeeper:
+        image: wurstmeister/zookeeper:latest
+        ports: 
+            - "2181:2181"
+    
+    broker:
+        image: wurstmeister/kafka:latest
+        ports: 
+            - "9092:9092"
+        depends_on: 
+            - zookeeper
+        environment: 
+            KAFKA_BROKER_ID: 1
+            KAFKA_ADVERTIZED_HOST_NAME: broker
+            KAFKA_ADVERTIZED_PORT: 9092
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+            KAFKA_LISTENERS: PLAINTEXT://broker:9092
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092
+            KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+            KAFKA_CREATE_TOPICS : 'tweetstream:1:1,processedData:1:1'
+
+networks: 
+    default:
+        external: 
+            name: kafka-network

@@ -1,0 +1,67 @@
+version: "3"
+
+services: 
+    #will twitterapi and tweetprocessor
+    ui:
+        image: ui:v1
+        ports: 
+            - "3000:3000"
+        environment: 
+            KAFKA_HOST : broker:9092
+            KAFKA_PROCESSED_TOPIC : processedData
+
+    tweetprocessor:
+        image: tweetprocessor:v1
+        restart: on-failure
+        environment: 
+            KAFKA_HOST : broker:9092
+            KAFKA_TOPIC : tweetstream
+            KAFKA_PROCESSED_TOPIC : processedData
+            SENTIMENT_API_ENDPOINT : http://sentimentanalyzer:5000/predict 
+            TWEET_STORE_ENDPOINT : http://tweetstore:4000/tweets
+        links:  
+            - sentimentanalyzer
+            - tweetstore
+
+    
+    twitterapi:
+        image: tweetapi:v1
+        environment: 
+            KAFKA_HOST : broker:9092
+            KAFKA_TOPIC : tweetstream
+        links:  
+            - sentimentanalyzer
+            - tweetstore
+
+    sentimentanalyzer:
+        image: sentimentanalyzer:v1
+        restart: on-failure
+        ports: 
+            - "5000:5000"      
+
+    tweetstore:
+        image: tweetstore:v1
+        restart: always
+        ports: 
+            - "4000:4000"
+        environment: 
+            MONGO_URL : mongodb://mongo:27017
+        links:  
+            - mongo
+
+    mongo:
+        image: mongo
+        volumes: 
+            - ./data:/data/db
+        ports: 
+            - "27017:27017"
+        volumes:
+            - mongo:/data/db
+
+volumes: 
+    mongo:
+
+networks: 
+    default:
+        external: 
+            name: kafka-network
