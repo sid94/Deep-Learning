@@ -13,6 +13,10 @@ This tweet data is consumed on a React based UI
 
 ## Demo
 
+## System Design
+
+![alt text](https://github.com/sid94/Deep-Learning/blob/master/SentimentAnalysis/demo/sentimentanalysis_architecture.jpg?raw=true)
+
 ## Deep Learning Model Api
 
 Sentiment analysis using Deep Learning. Processed 1.6 Millions labelled tweets using tensorflow
